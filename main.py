@@ -30,8 +30,9 @@ async def root_endpoint():
 
 @router.post("/ai-response/", tags=["GenAI API"])
 async def get_genai_response(request: MailRequest):
-    prompt = get_prompt(request.mail_content, request.model_name)
-    response = get_llm_response(request.model_name, prompt)
+    mail_tone = "Clear and Appreciative"
+    prompt = get_prompt(request.mail_content, mail_tone)
+    response = get_llm_response(os.getenv("GEMINI_MODEL"), prompt)
     return {"message": "ok", "response": response}
 
 
