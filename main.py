@@ -9,7 +9,7 @@ from utils import (
     MailRequest
 )
 
-load_dotenv()
+load_dotenv(override=True)
 genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
 
 logger = get_logger("Mail AI", "app.log")
