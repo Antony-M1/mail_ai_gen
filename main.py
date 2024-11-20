@@ -1,6 +1,8 @@
 import os
+import traceback
 import google.generativeai as genai
 from fastapi import FastAPI, APIRouter
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from utils import (
     get_logger,
@@ -30,10 +32,13 @@ async def root_endpoint():
 
 @router.post("/ai-response/", tags=["GenAI API"])
 async def get_genai_response(request: MailRequest):
-    mail_tone = "Clear and Appreciative"
-    prompt = get_prompt(request.mail_content, mail_tone)
-    response = get_llm_response(os.getenv("GEMINI_MODEL"), prompt)
-    return {"message": "ok", "response": response}
-
+    try:
+        mail_tone = "Clear and Appreciative"
+        prompt = get_prompt(request.mail_content, mail_tone)
+        response = get_llm_response(os.getenv("GEMINI_MODEL"), prompt)
+        return {"message": "ok", "response": response}
+    except Exception as ex:
+        logger.critical(traceback.format_exc())
+        return JSONResponse(status_code=400, content={"message": str(ex)})
 
 app.include_router(router)
