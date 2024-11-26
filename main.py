@@ -10,7 +10,6 @@ from utils import (
     get_llm_response,
     MailRequest
 )
-from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv(override=True)
 genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
@@ -18,18 +17,6 @@ genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
 logger = get_logger("Mail AI", "app.log")
 
 app = FastAPI()
-
-origins = [
-    "*"
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 router = APIRouter(
     prefix="/api/v1",
