@@ -1,6 +1,12 @@
 # mail_ai_gen
 Gen AI, FastAPI
 
+# .env
+```py
+GOOGLE_API_KEY=<YOUR_KEY>
+GEMINI_MODEL=gemini-2.0-flash
+```
+
 **Reference**
 - [FastAPI Production setup](https://github.com/Antony-M1/fastapi-production-setup/blob/main/production-setup.md)
 - [Deploy FastAPI on AWS EC2: Quick and Easy Steps!](https://medium.com/@shreyash966977/deploy-fastapi-on-aws-ec2-quick-and-easy-steps-954d4a1e4742)
